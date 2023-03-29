@@ -18,7 +18,7 @@ Route::get('/', function () {
 });
 
 
-Auth::routes(['register' => true]);
+Auth::routes(['register' => false]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -66,11 +66,12 @@ Route::get('print-invoice/{id}', 'InvoiceController@printInvoice')->name('print-
 
 Route::get('invoices-export', 'InvoiceController@export')->name('invoices-export');
 
-Route::group(['middleware' => ['auth']], function() {
-    Route::resource('roles','RoleController');
+// Route::group(['middleware' => ['auth']], function() {
+//     Route::resource('roles','RoleController');
+//     Route::resource('users','UserController');
+// });
+Route::resource('roles','RoleController');
     Route::resource('users','UserController');
-});
-
 Route::get('reports-invoices', 'ReportInvoiceController@index')->name('reports-invoices');
 
 Route::post('search-invoices', 'ReportInvoiceController@search')->name('search-invoices');
@@ -81,4 +82,4 @@ Route::post('search-customer', 'ReportInvoiceController@searchCustomer')->name('
 
 Route::get('make-all-read', 'InvoiceController@makeAllRead')->name('make-all-read');
 //
-Route::get('/{page}', 'AdminController@index');
+// Route::get('/{page}', 'AdminController@index');
